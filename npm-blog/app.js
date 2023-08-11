@@ -1,5 +1,3 @@
-//jshint esversion:6
-
 const express = require("express");
 const bodyParser = require("body-parser");
 const ejs = require("ejs");
@@ -14,18 +12,21 @@ const app = express();
 app.set('view engine', 'ejs');
 
 app.use(bodyParser.urlencoded({extended: true}));
-app.use(express.static("public"))
+app.use(express.static("public"));
+
+let posts = []
 
 app.get('/', (req, res) =>{
-  res.render('home', {homeContent: homeStartingContent})
+  res.render('home', {homeContent: homeStartingContent});
+  
 })
 
 app.get('/about', (req, res) =>{
-  res.render('about', {aboutContent: aboutContent})
+  res.render('about', {aboutContent: aboutContent});
 })
 
 app.get('/contact', (req, res) =>{
-  res.render('contact', {contactContent: contactContent})
+  res.render('contact', {contactContent: contactContent});
 })
 
 app.get('/compose', (req, res) =>{
@@ -38,12 +39,11 @@ app.post("/compose", (req, res) =>{
     title: req.body.postTitle,
     content: req.body.postBody,
   }
-  console.log(post);
+  posts.push(post)
+  res.redirect('/')
 });
 
 
-app.use(bodyParser.urlencoded({extended: true}));
-app.use(express.static("public"));
 
 
 
