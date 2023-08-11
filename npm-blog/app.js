@@ -17,7 +17,8 @@ app.use(express.static("public"));
 let posts = []
 
 app.get('/', (req, res) =>{
-  res.render('home', {homeContent: homeStartingContent});
+  res.render('home', {homeContent: homeStartingContent,
+                       posts: posts});
   
 })
 
